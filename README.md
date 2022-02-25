@@ -54,6 +54,30 @@ Your finished project must include all of the following requirements (further in
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics.
 
 1. Differences between using _sessions_ or _JSON Web Tokens_ for authentication.
+
+In the session based authentication, the server will create a session for the user after the user logs in. The session id is then stored on a cookie on the user’s browser. While the user stays logged in, the cookie would be sent along with every subsequent request. The server can then compare the session id stored on the cookie against the session information stored in the memory to verify user’s identity and sends response with the corresponding state.
+
+Many web applications use JSON Web Token (JWT) instead of sessions for authentication. In the token based application, the server creates JWT with a secret and sends the JWT to the client. The client stores the JWT (usually in local storage) and includes JWT in the header with every request. The server would then validate the JWT with every request from the client and sends response.
+
+The biggest difference here is that the user’s state is not stored on the server, as the state is stored inside the token on the client side instead. Most of the modern web applications use JWT for authentication for reasons including scalability and mobile device authentication.
+
 2. What does `bcryptjs` do to help us store passwords in a secure manner?
+
+ `bcryptjs` is an adaptive password hashing function. Over time, the interation count can be increased to make it slower, so it remains resistant to brute-force search attacks even with increasing computation power.
+
 3. How are unit tests different from integration and end-to-end testing?
+
+Unit: Verify that individual, isolated parts work as expected.
+
+Integration: Verify that several units work together in harmony.
+
+End to End: A helper robot that behaves like a user to click around the app and verify that it functions correctly. Sometimes called "functional testing" or e2e.
+
 4. How does _Test Driven Development_ change the way we write applications and tests?
+
+Test-driven development (TDD) is a software development process relying on software requirements being converted to test cases before software is fully developed, and tracking all software development by repeatedly testing the software against all test cases. This is as opposed to software being developed first and test cases created later.
+(1) Add a test
+(2) Run all tests. The new test should fail for expected reasons
+(3) Write the simplest code that passes the new test
+(4) All tests should now pass
+(5) Refactor as needed, using tests after each refactor to ensure that functionality is preserved
