@@ -3,7 +3,9 @@ const makeToken = require('./auth-token-builder');
 const router = require('express').Router();
 const User = require('../users/users-model.js');
 
-router.post('/register', (req, res, next) =>
+const { checkUsernameUnique, checkUsernameExists, checkUserData } = require('./auth-middleware');
+
+router.post('/register', checkUserData, checkUsernameUnique, (req, res, next) =>
 {
     /*
       IMPLEMENT
@@ -46,7 +48,7 @@ router.post('/register', (req, res, next) =>
         .catch(next);
 });
 
-router.post('/login', (req, res, next) =>
+router.post('/login', checkUserData, checkUsernameExists, (req, res, next) =>
 {
     /*
       IMPLEMENT
